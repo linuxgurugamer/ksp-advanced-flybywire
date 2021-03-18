@@ -71,6 +71,14 @@ namespace KSPAdvancedFlyByWire
         Custom08,
         Custom09,
         Custom10,
+        CustomAxis1Plus,
+        CustomAxis1Minus,
+        CustomAxis2Plus,
+        CustomAxis2Minus,
+        CustomAxis3Plus,
+        CustomAxis3Minus,
+        CustomAxis4Plus,
+        CustomAxis4Minus,
         LockStage,
 
         // EVA
@@ -134,6 +142,10 @@ namespace KSPAdvancedFlyByWire
         WheelSteerTrim,
         WheelThrottle,
         WheelThrottleTrim,
+        CustomAxis1,
+        CustomAxis2,
+        CustomAxis3,
+        CustomAxis4,
         CameraX,
         CameraY,
         CameraZoom

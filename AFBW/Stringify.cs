@@ -78,6 +78,22 @@
                     return "Custom 9";
                 case DiscreteAction.Custom10:
                     return "Custom 10";
+                case DiscreteAction.CustomAxis1Minus:
+                    return "Custom Axis 1-";
+                case DiscreteAction.CustomAxis1Plus:
+                    return "Custom Axis 1+";
+                case DiscreteAction.CustomAxis2Minus:
+                    return "Custom Axis 2-";
+                case DiscreteAction.CustomAxis2Plus:
+                    return "Custom Axis 2+";
+                case DiscreteAction.CustomAxis3Minus:
+                    return "Custom Axis 3-";
+                case DiscreteAction.CustomAxis3Plus:
+                    return "Custom Axis 3+";
+                case DiscreteAction.CustomAxis4Minus:
+                    return "Custom Axis 4-";
+                case DiscreteAction.CustomAxis4Plus:
+                    return "Custom Axis 4+";
                 case DiscreteAction.EVAToggleJetpack:
                     return "EVA Jetpack [Toggle]";
                 case DiscreteAction.EVAInteract:
@@ -213,6 +229,14 @@
                     return "Throttle (Decrement)";
                 case ContinuousAction.WheelSteer:
                     return "Wheel Steer";
+                case ContinuousAction.CustomAxis1:
+                    return "Custom Axis 1";
+                case ContinuousAction.CustomAxis2:
+                    return "Custom Axis 2";
+                case ContinuousAction.CustomAxis3:
+                    return "Custom Axis 3";
+                case ContinuousAction.CustomAxis4:
+                    return "Custom Axis 4";
                 case ContinuousAction.WheelSteerTrim:
                     return "Wheel Steer (Trim)";
                 case ContinuousAction.WheelThrottle:
