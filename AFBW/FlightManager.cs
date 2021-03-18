@@ -28,7 +28,12 @@ namespace KSPAdvancedFlyByWire
         public FlightProperty m_CameraHeading = new FlightProperty(-1.0f, 1.0f);
         public FlightProperty m_CameraZoom = new FlightProperty(-1.0f, 1.0f);
 
-        // VesselAutopilot.VesselSAS
+        public FlightProperty m_custom_axes_1 = new FlightProperty(-1.0f, 1.0f);
+        public FlightProperty m_custom_axes_2 = new FlightProperty(-1.0f, 1.0f);
+        public FlightProperty m_custom_axes_3 = new FlightProperty(-1.0f, 1.0f);
+        public FlightProperty m_custom_axes_4 = new FlightProperty(-1.0f, 1.0f);
+
+        // VesselAutopilot.VesselSAS  
         public static float controlDetectionThreshold = 0.05f;
 
         private bool m_DisableVesselControls = false;
@@ -184,6 +189,18 @@ namespace KSPAdvancedFlyByWire
             }
 
             state.wheelSteer = Utility.Clamp(state.wheelSteer + m_WheelSteer.Update(), -1.0f, 1.0f);
+
+            state.custom_axes[0] = Utility.Clamp(state.custom_axes[0] + m_custom_axes_1.Update() * precisionModeFactor, -1.0f, 1.0f);
+            state.custom_axes[1] = Utility.Clamp(state.custom_axes[1] + m_custom_axes_2.Update() * precisionModeFactor, -1.0f, 1.0f);
+            state.custom_axes[2] = Utility.Clamp(state.custom_axes[2] + m_custom_axes_3.Update() * precisionModeFactor, -1.0f, 1.0f);
+            state.custom_axes[3] = Utility.Clamp(state.custom_axes[3] + m_custom_axes_4.Update() * precisionModeFactor, -1.0f, 1.0f);
+
+            AxisGroupsModule axisModule = FlightGlobals.ActiveVessel.FindVesselModuleImplementing<AxisGroupsModule>();
+            axisModule.SetAxisGroup(KSPAxisGroup.Custom01, state.custom_axes[0]);
+            axisModule.SetAxisGroup(KSPAxisGroup.Custom02, state.custom_axes[1]);
+            axisModule.SetAxisGroup(KSPAxisGroup.Custom03, state.custom_axes[2]);
+            axisModule.SetAxisGroup(KSPAxisGroup.Custom04, state.custom_axes[3]);
+
         }
 
         private void ZeroOutFlightProperties()
@@ -248,6 +265,26 @@ namespace KSPAdvancedFlyByWire
             if (!m_CameraZoom.HasIncrement())
             {
                 m_CameraZoom.SetValue(0.0f);
+            }
+
+            if (!m_custom_axes_1.HasIncrement())
+            {
+                m_custom_axes_1.SetValue(0.0f);
+            }
+
+            if (!m_custom_axes_2.HasIncrement())
+            {
+                m_custom_axes_2.SetValue(0.0f);
+            }
+
+            if (!m_custom_axes_3.HasIncrement())
+            {
+                m_custom_axes_3.SetValue(0.0f);
+            }
+
+            if (!m_custom_axes_4.HasIncrement())
+            {
+                m_custom_axes_4.SetValue(0.0f);
             }
         }
 
@@ -524,6 +561,30 @@ namespace KSPAdvancedFlyByWire
                 case DiscreteAction.Custom10:
                     FlightGlobals.ActiveVessel.ActionGroups.ToggleGroup(KSPActionGroup.Custom10);
                     return;
+                case DiscreteAction.CustomAxis1Plus:
+                    m_custom_axes_1.SetIncrement(1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.CustomAxis1Minus:
+                    m_custom_axes_1.SetIncrement(-1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.CustomAxis2Plus:
+                    m_custom_axes_2.SetIncrement(1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.CustomAxis2Minus:
+                    m_custom_axes_2.SetIncrement(-1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.CustomAxis3Plus:
+                    m_custom_axes_3.SetIncrement(1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.CustomAxis3Minus:
+                    m_custom_axes_3.SetIncrement(-1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.CustomAxis4Plus:
+                    m_custom_axes_4.SetIncrement(1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.CustomAxis4Minus:
+                    m_custom_axes_4.SetIncrement(-1, controller.discreteActionStep);
+                    return;
                 case DiscreteAction.SASHold:
                     FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.SAS, true);
                     return;
@@ -617,6 +678,30 @@ namespace KSPAdvancedFlyByWire
                 case DiscreteAction.CameraYMinus:
                     m_CameraPitch.SetIncrement(0);
                     return;
+                case DiscreteAction.CustomAxis1Plus:
+                    m_custom_axes_1.SetIncrement(0);
+                    return;
+                case DiscreteAction.CustomAxis1Minus:
+                    m_custom_axes_1.SetIncrement(0);
+                    return;
+                case DiscreteAction.CustomAxis2Plus:
+                    m_custom_axes_2.SetIncrement(0);
+                    return;
+                case DiscreteAction.CustomAxis2Minus:
+                    m_custom_axes_2.SetIncrement(0);
+                    return;
+                case DiscreteAction.CustomAxis3Plus:
+                    m_custom_axes_3.SetIncrement(0);
+                    return;
+                case DiscreteAction.CustomAxis3Minus:
+                    m_custom_axes_3.SetIncrement(0);
+                    return;
+                case DiscreteAction.CustomAxis4Plus:
+                    m_custom_axes_4.SetIncrement(0);
+                    return;
+                case DiscreteAction.CustomAxis4Minus:
+                    m_custom_axes_4.SetIncrement(0);
+                    return;
             }
 
             if (m_DisableVesselControls)
@@ -708,6 +793,18 @@ namespace KSPAdvancedFlyByWire
                     return;
                 case ContinuousAction.WheelSteerTrim:
                     m_WheelSteer.SetTrim(Utility.Clamp(m_WheelSteer.GetTrim() + value * controller.incrementalActionSensitivity * Time.deltaTime, -1.0f, 1.0f));
+                    return;
+                case ContinuousAction.CustomAxis1:
+                    m_custom_axes_1.SetValue(value);
+                    return;
+                case ContinuousAction.CustomAxis2:
+                    m_custom_axes_2.SetValue(value);
+                    return;
+                case ContinuousAction.CustomAxis3:
+                    m_custom_axes_3.SetValue(value);
+                    return;
+                case ContinuousAction.CustomAxis4:
+                    m_custom_axes_4.SetValue(value);
                     return;
                 case ContinuousAction.CameraX:
                     m_CameraHeading.Increment(value);
