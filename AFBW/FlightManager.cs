@@ -77,7 +77,7 @@ namespace KSPAdvancedFlyByWire
                 }
             }
 
-            UpdateFlightProperties(state);
+            if(FlightGlobals.ActiveVessel.CurrentControlLevel != Vessel.ControlLevel.NONE) UpdateFlightProperties(state);
 
             ZeroOutFlightProperties();
 
