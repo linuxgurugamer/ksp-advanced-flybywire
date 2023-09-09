@@ -34,7 +34,6 @@ namespace KSPAdvancedFlyByWire
             new FlightProperty(-1.0f, 1.0f),
         };
 
-
         // VesselAutopilot.VesselSAS
         public static float controlDetectionThreshold = 0.05f;
 
@@ -311,60 +310,6 @@ namespace KSPAdvancedFlyByWire
             {
                 case DiscreteAction.None:
                     return;
-                case DiscreteAction.YawPlus:
-                    m_Yaw.SetIncrement(1, controller.discreteActionStep);
-                    return;
-                case DiscreteAction.YawMinus:
-                    m_Yaw.SetIncrement(-1, controller.discreteActionStep);
-                    return;
-                case DiscreteAction.PitchPlus:
-                    m_Pitch.SetIncrement(1, controller.discreteActionStep);
-                    return;
-                case DiscreteAction.PitchMinus:
-                    m_Pitch.SetIncrement(-1, controller.discreteActionStep);
-                    return;
-                case DiscreteAction.PitchTrimPlus:
-                    m_Pitch.SetTrim(Utility.Clamp(m_Pitch.GetTrim() + controller.discreteActionStep / 10f, -1.0f, 1.0f));
-                    return;
-                case DiscreteAction.PitchTrimMinus:
-                    m_Pitch.SetTrim(Utility.Clamp(m_Pitch.GetTrim() - controller.discreteActionStep / 10f, -1.0f, 1.0f));
-                    return;
-                case DiscreteAction.RollPlus:
-                    m_Roll.SetIncrement(1, controller.discreteActionStep);
-                    return;
-                case DiscreteAction.RollMinus:
-                    m_Roll.SetIncrement(-1, controller.discreteActionStep);
-                    return;
-                case DiscreteAction.XPlus:
-                    m_X.SetIncrement(1, controller.discreteActionStep);
-                    return;
-                case DiscreteAction.XMinus:
-                    m_X.SetIncrement(-1, controller.discreteActionStep);
-                    return;
-                case DiscreteAction.YPlus:
-                    m_Y.SetIncrement(1, controller.discreteActionStep);
-                    return;
-                case DiscreteAction.YMinus:
-                    m_Y.SetIncrement(-1, controller.discreteActionStep);
-                    return;
-                case DiscreteAction.ZPlus:
-                    m_Z.SetIncrement(1, controller.discreteActionStep);
-                    return;
-                case DiscreteAction.ZMinus:
-                    m_Z.SetIncrement(-1, controller.discreteActionStep);
-                    return;
-                case DiscreteAction.ThrottlePlus:
-                    m_Throttle.SetIncrement(1, controller.discreteActionStep);
-                    return;
-                case DiscreteAction.ThrottleMinus:
-                    m_Throttle.SetIncrement(-1, controller.discreteActionStep);
-                    return;
-                case DiscreteAction.CutThrottle:
-                    m_Throttle.SetValue(-state.mainThrottle);
-                    return;
-                case DiscreteAction.FullThrottle:
-                    m_Throttle.SetValue(1.0f - state.mainThrottle);
-                    return;
                 case DiscreteAction.NextPreset:
                     if (controller.currentPreset >= controller.presets.Count - 1)
                     {
@@ -449,6 +394,83 @@ namespace KSPAdvancedFlyByWire
                         FlightCamera.fetch.SetNextMode();
                     }
                     return;
+                case DiscreteAction.TogglePrecisionControls:
+                    if (FlightInputHandler.fetch != null)
+                    {
+                        FlightInputHandler.fetch.precisionMode = !FlightInputHandler.fetch.precisionMode;
+                        GameEvents.Input.OnPrecisionModeToggle.Fire(FlightInputHandler.fetch.precisionMode);
+                    }
+                    return;
+                case DiscreteAction.IVANextCamera:
+                    CameraController.Instance.NextIVACamera();
+                    return;
+                case DiscreteAction.IVALookWindow:
+                    CameraController.Instance.FocusIVAWindow();
+                    return;
+            }
+
+            if (FlightGlobals.ActiveVessel.CurrentControlLevel == Vessel.ControlLevel.NONE)
+            {
+                return;
+            }
+
+            // Actions that require control
+            switch (action)
+            {
+                case DiscreteAction.YawPlus:
+                    m_Yaw.SetIncrement(1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.YawMinus:
+                    m_Yaw.SetIncrement(-1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.PitchPlus:
+                    m_Pitch.SetIncrement(1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.PitchMinus:
+                    m_Pitch.SetIncrement(-1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.PitchTrimPlus:
+                    m_Pitch.SetTrim(Utility.Clamp(m_Pitch.GetTrim() + controller.discreteActionStep / 10f, -1.0f, 1.0f));
+                    return;
+                case DiscreteAction.PitchTrimMinus:
+                    m_Pitch.SetTrim(Utility.Clamp(m_Pitch.GetTrim() - controller.discreteActionStep / 10f, -1.0f, 1.0f));
+                    return;
+                case DiscreteAction.RollPlus:
+                    m_Roll.SetIncrement(1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.RollMinus:
+                    m_Roll.SetIncrement(-1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.XPlus:
+                    m_X.SetIncrement(1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.XMinus:
+                    m_X.SetIncrement(-1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.YPlus:
+                    m_Y.SetIncrement(1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.YMinus:
+                    m_Y.SetIncrement(-1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.ZPlus:
+                    m_Z.SetIncrement(1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.ZMinus:
+                    m_Z.SetIncrement(-1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.ThrottlePlus:
+                    m_Throttle.SetIncrement(1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.ThrottleMinus:
+                    m_Throttle.SetIncrement(-1, controller.discreteActionStep);
+                    return;
+                case DiscreteAction.CutThrottle:
+                    m_Throttle.SetValue(-state.mainThrottle);
+                    return;
+                case DiscreteAction.FullThrottle:
+                    m_Throttle.SetValue(1.0f - state.mainThrottle);
+                    return;
                 case DiscreteAction.SASHold:
                     FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.SAS, true);
                     return;
@@ -494,34 +516,11 @@ namespace KSPAdvancedFlyByWire
                         setAutopilotMode(VesselAutopilot.AutopilotMode.Target);
                     };
                     return;
-                case DiscreteAction.TogglePrecisionControls:
-                    if (FlightInputHandler.fetch != null)
-                    {
-                        FlightInputHandler.fetch.precisionMode = !FlightInputHandler.fetch.precisionMode;
-                        GameEvents.Input.OnPrecisionModeToggle.Fire(FlightInputHandler.fetch.precisionMode);
-                    }
-                    return;
                 case DiscreteAction.ResetTrim:
                     m_Yaw.SetTrim(0.0f);
                     m_Pitch.SetTrim(0.0f);
                     m_Roll.SetTrim(0.0f);
                     return;
-                case DiscreteAction.IVANextCamera:
-                    CameraController.Instance.NextIVACamera();
-                    return;
-                case DiscreteAction.IVALookWindow:
-                    CameraController.Instance.FocusIVAWindow();
-                    return;
-            }
-
-            if (m_DisableVesselControls)
-            {
-                return;
-            }
-
-            // all other actions
-            switch (action)
-            {
                 case DiscreteAction.Stage:
                     KSP.UI.Screens.StageManager.ActivateNextStage();
                     return;
@@ -577,9 +576,17 @@ namespace KSPAdvancedFlyByWire
                 case DiscreteAction.Custom10:
                     FlightGlobals.ActiveVessel.ActionGroups.ToggleGroup(KSPActionGroup.Custom10);
                     return;
-                case DiscreteAction.SASHold:
-                    FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.SAS, true);
-                    return;
+            }
+
+            if (m_DisableVesselControls)
+            {
+                return;
+            }
+
+            // all other actions
+            switch (action)
+            {
+                
                 case DiscreteAction.LockStage:
                     if (FlightInputHandler.fetch != null)
                     {
@@ -610,6 +617,34 @@ namespace KSPAdvancedFlyByWire
             {
                 case DiscreteAction.None:
                     return;
+                case DiscreteAction.CameraZoomPlus:
+                    m_CameraZoom.SetIncrement(0);
+                    return;
+                case DiscreteAction.CameraZoomMinus:
+                    m_CameraZoom.SetIncrement(0);
+                    return;
+                case DiscreteAction.CameraXPlus:
+                    m_CameraHeading.SetIncrement(0);
+                    return;
+                case DiscreteAction.CameraXMinus:
+                    m_CameraHeading.SetIncrement(0);
+                    return;
+                case DiscreteAction.CameraYPlus:
+                    m_CameraPitch.SetIncrement(0);
+                    return;
+                case DiscreteAction.CameraYMinus:
+                    m_CameraPitch.SetIncrement(0);
+                    return;
+            }
+
+            if (FlightGlobals.ActiveVessel.CurrentControlLevel == Vessel.ControlLevel.NONE)
+            {
+                return;
+            }
+
+            // Actions that require control
+            switch (action)
+            {
                 case DiscreteAction.YawPlus:
                     m_Yaw.SetIncrement(0);
                     return;
@@ -652,25 +687,7 @@ namespace KSPAdvancedFlyByWire
                 case DiscreteAction.ThrottleMinus:
                     m_Throttle.SetIncrement(0);
                     return;
-                case DiscreteAction.CameraZoomPlus:
-                    m_CameraZoom.SetIncrement(0);
-                    return;
-                case DiscreteAction.CameraZoomMinus:
-                    m_CameraZoom.SetIncrement(0);
-                    return;
-                case DiscreteAction.CameraXPlus:
-                    m_CameraHeading.SetIncrement(0);
-                    return;
-                case DiscreteAction.CameraXMinus:
-                    m_CameraHeading.SetIncrement(0);
-                    return;
-                case DiscreteAction.CameraYPlus:
-                    m_CameraPitch.SetIncrement(0);
-                    return;
-                case DiscreteAction.CameraYMinus:
-                    m_CameraPitch.SetIncrement(0);
-                    return;
-            }
+                }
 
             if (m_DisableVesselControls)
             {
@@ -694,6 +711,38 @@ namespace KSPAdvancedFlyByWire
             {
                 case ContinuousAction.None:
                     return;
+                case ContinuousAction.CameraX:
+                    m_CameraHeading.Increment(value);
+                    return;
+                case ContinuousAction.CameraY:
+                    m_CameraPitch.Increment(value);
+                    return;
+                case ContinuousAction.CameraZoom:
+                    m_CameraZoom.Increment(value);
+                    return;
+                case ContinuousAction.Custom1:
+                    m_CustomAxes[0].SetValue(value);
+                    return;
+                case ContinuousAction.Custom2:
+                    m_CustomAxes[1].SetValue(value);
+                    return;
+                case ContinuousAction.Custom3:
+                    m_CustomAxes[2].SetValue(value);
+                    return;
+                case ContinuousAction.Custom4:
+                    m_CustomAxes[3].SetValue(value);
+                    return;
+            }
+
+            if(FlightGlobals.ActiveVessel.CurrentControlLevel == Vessel.ControlLevel.NONE)
+            {
+                return;
+            }
+
+
+            // Actions that require control
+            switch (action)
+            {
                 case ContinuousAction.Yaw:
                     m_Yaw.SetValue(value);
                     return;
@@ -761,27 +810,6 @@ namespace KSPAdvancedFlyByWire
                     return;
                 case ContinuousAction.WheelSteerTrim:
                     m_WheelSteer.SetTrim(Utility.Clamp(m_WheelSteer.GetTrim() + value * controller.incrementalActionSensitivity * Time.deltaTime, -1.0f, 1.0f));
-                    return;
-                case ContinuousAction.CameraX:
-                    m_CameraHeading.Increment(value);
-                    return;
-                case ContinuousAction.CameraY:
-                    m_CameraPitch.Increment(value);
-                    return;
-                case ContinuousAction.CameraZoom:
-                    m_CameraZoom.Increment(value);
-                    return;
-                case ContinuousAction.Custom1:
-                    m_CustomAxes[0].SetValue(value);
-                    return;
-                case ContinuousAction.Custom2:
-                    m_CustomAxes[1].SetValue(value);
-                    return;
-                case ContinuousAction.Custom3:
-                    m_CustomAxes[2].SetValue(value);
-                    return;
-                case ContinuousAction.Custom4:
-                    m_CustomAxes[3].SetValue(value);
                     return;
             }
         }
