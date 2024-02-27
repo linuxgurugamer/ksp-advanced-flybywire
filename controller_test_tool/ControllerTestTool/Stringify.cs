@@ -183,6 +183,14 @@
                     return "Camera Y";
                 case ContinuousAction.CameraZoom:
                     return "Camera zoom";
+                case ContinuousAction.Custom1:
+                    return "Custom Axis 1";
+                case ContinuousAction.Custom2:
+                    return "Custom Axis 2";
+                case ContinuousAction.Custom3:
+                    return "Custom Axis 3";
+                case ContinuousAction.Custom4:
+                    return "Custom Axis 4";
                 default:
                     return "Unknown action";
             }

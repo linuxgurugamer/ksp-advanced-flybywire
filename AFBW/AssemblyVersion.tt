@@ -2,7 +2,7 @@
 <#@ import namespace="System.IO" #>
 <#@ output extension=".cs" #>
 
-<#@ Assembly Name="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies\envdte.dll" #>
+<#@ assembly name="EnvDTE" #><# /* This assembly provides access to Visual Studio project properties. */ #>
 <#
 
 	// Instructions
@@ -33,6 +33,7 @@
 	//
 	// Update the following with the name of the .version file which is in the root directory
 	//
+	
 	string versionfile = RootDirectory + "ksp-advanced-flybywire.version";
 
 
@@ -98,3 +99,4 @@
  using System.Reflection;
 
  [assembly: AssemblyVersion("<#= major #>.<#= minor #>.<#= patch #>.<#= build #>")]
+ [assembly: AssemblyFileVersion("<#= major #>.<#= minor #>.<#= patch #>.<#= build #>")]

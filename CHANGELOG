@@ -1,5 +1,26 @@
 ChangeLog
 
+1.8.4.1
+	Fixed issue where buttons to change throttle weren't working unless there was at least one axis defined
+
+1.8.4
+	Thanks to github user @AlexanderDzhoganov for this:
+		Add support for Custom Axis Groups
+
+1.8.3.7
+	Fixed small memory leak
+
+1.8.3.6
+	removed bad DLLs
+
+1.8.3.5
+	Updated SDL2 for KSP 1.12
+
+1.8.3.4
+	Renamed DLL for CKAN compatibility
+	Added AssemblyFileVersion
+	Updated version file for 1.12
+
 1.8.3.3
 	Add right-click to disable/enable any active controllers
 	Inverted the button colors when disabled

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -8,8 +8,8 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KSPAdvancedFlyByWire</RootNamespace>
-    <AssemblyName>ksp-advanced-flybywire</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AssemblyName>AdvancedFlyByWire</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <FileUpgradeFlags>
@@ -131,23 +131,31 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-start /D D:\Users\jbb\github\ksp-advanced-flybywire\  /WAIT deploy.bat  $(TargetDir) $(TargetFileName)
+set KSPDIR=$(KSPDIR)
 
-if $(ConfigurationName) == Release (
-	start /D D:\Users\jbb\github\ksp-advanced-flybywire\ /WAIT buildRelease.bat $(TargetDir) $(TargetFileName)
+IF "%25KSPDIR%25"=="" (
+
+	ECHO Configuration error - KSPDIR not specified in project.
+
+	ECHO Either set KSPDIR environment variable or edit BetterLoadSaveGame.Common.props
+
+	PAUSE
+
+	GOTO DONE
+
 )
 
+start /D $(SolutionDir) /WAIT deploy.bat  $(TargetDir) $(TargetFileName) $(TargetName)
 
+if $(ConfigurationName) == Release (	
+
+	start /D $(SolutionDir) /WAIT buildRelease.bat $(TargetDir) $(TargetFileName) $(TargetName)
+
+)
 </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>
-
-set textTemplatingPath="%25ProgramFiles(x86)%25\Microsoft Visual Studio\2017\Community\Common7\IDE\texttransform.exe"
-
-
-
-%25textTemplatingPath%25 "$(ProjectDir)AssemblyVersion.tt"
+    <PreBuildEvent>"$(DevEnvDir)\texttransform.exe" "$(ProjectDir)AssemblyVersion.tt"
 </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

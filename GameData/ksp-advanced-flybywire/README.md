@@ -1,21 +1,28 @@
-## Advanced Fly-By-Wire v1.7-beta
-### Kerbal Space Program input system overhaul mod
-
-Latest version - 1.7-beta for KSP 1.1 and later
+## Advanced Fly-By-Wire
+### Kerbal Space Program input system overhaul mod for KSP 1.1 and later
 
 [Download latest version](https://github.com/linuxgurugamer/ksp-advanced-flybywire/releases)
 
-[Licensed under the MIT License](https://github.com/AlexanderDzhoganov/ksp-advanced-flybywire/blob/master/LICENSE)
+[Licensed under the MIT License](https://github.com/linuxgurugamer/ksp-advanced-flybywire/blob/master/LICENSE)
 
 You can also find the mod on:
-- [Official forums](http://forum.kerbalspaceprogram.com/threads/95022-0-24-2-Advanced-Fly-by-wire-v1-0-%28Better-controller-support%29)
-- [KerbalStuff](https://kerbalstuff.com/mod/232/Advanced%20Fly-By-Wire)
+- [Official forums](https://forum.kerbalspaceprogram.com/index.php?/topic/175359-19x-afbw-revived-joystick-controller-mod/)
+- Spacedock [Windows](https://spacedock.info/mod/1869) [Linux](https://spacedock.info/mod/1870/)
+
+Original development by nlight: [mod page](https://forum.kerbalspaceprogram.com/index.php?/topic/85711-11-afbw-v17-beta-joystick-controller-mod/) [Github](https://github.com/AlexanderDzhoganov/ksp-advanced-flybywire)
 
 #### Installation
-On Windows, simply extract the ZIP file into the root installation folder for your game. Often this is directly in `%ProgramFiles%`. If you are using Steam, it will be located in `%ProgramFiles%\Steam\steamapps\common\Kerbal Space Program`.
+1. Download and install prerequisite mods:
+   * [Click Through Blocker](https://forum.kerbalspaceprogram.com/index.php?/topic/170747-19x-click-through-blocker/)
+   * [ToolbarController](https://forum.kerbalspaceprogram.com/index.php?/topic/169509-141-toolbar-controller-for-modders/)
+1. Simply extract the ZIP file into the root installation folder for your game.
+   In Windows, the KSP folder will usually be directly in `%ProgramFiles%` or, if you are using Steam, `%ProgramFiles%\Steam\steamapps\common\Kerbal Space Program`.
+
+##### OSX
+Use `brew install sdl` then follow the instructions above.
 
 ### What is this?
-This is a mod for [Kerbal Space Program](http://kerbalspaceprogram.com), a spaceship building/ space exploration game by Squad.
+This is a mod for [Kerbal Space Program](http://kerbalspaceprogram.com), a spaceship building/space exploration game by Squad.
 It dramatically enhances the stock input system with a bunch of fixes and many new features.
 
 ### How is it better than stock?
@@ -39,10 +46,6 @@ It dramatically enhances the stock input system with a bunch of fixes and many n
 
 The mod adds a new button to the mod toolbar.
 
-Dependencies
-	ClickThroughBlocker
-	ToolbarController
-
 Click the game controller icon or press Shift + L during flight to bring up Fly-By-Wire's main configuration screen.
 
 From there you will see a list of detected controllers. You can click on "Enable" to enable a controller from the list - two new buttons will appear - "Presets" and "Configure".
@@ -62,14 +65,9 @@ The mod is extremely lightweight both on performance and memory. It only does a 
 no noticeable effect on CPU usage. Memory usage is in the order of a few megabytes.
 
 ### Bug reports
-Please report any bugs using [GitHub's issue tracker](https://github.com/AlexanderDzhoganov/ksp-advanced-flybywire/issues).
+Please report any bugs using [GitHub's issue tracker](https://github.com/linuxgurugamer/ksp-advanced-flybywire/issues).
 
 ### Changelog
 
-[Click here for changelog](https://raw.githubusercontent.com/AlexanderDzhoganov/ksp-advanced-flybywire/master/CHANGELOG)
-
-
-OSX Instructions
-
-Use brew install sdl2 and restart the game.
+[Click here for changelog](https://github.com/linuxgurugamer/ksp-advanced-flybywire/ksp-advanced-flybywire/master/CHANGELOG)
 

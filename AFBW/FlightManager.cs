@@ -27,6 +27,13 @@ namespace KSPAdvancedFlyByWire
         public FlightProperty m_CameraPitch = new FlightProperty(-1.0f, 1.0f);
         public FlightProperty m_CameraHeading = new FlightProperty(-1.0f, 1.0f);
         public FlightProperty m_CameraZoom = new FlightProperty(-1.0f, 1.0f);
+        public FlightProperty[] m_CustomAxes = new[] {
+            new FlightProperty(-1.0f, 1.0f),
+            new FlightProperty(-1.0f, 1.0f),
+            new FlightProperty(-1.0f, 1.0f),
+            new FlightProperty(-1.0f, 1.0f),
+        };
+
 
         public FlightProperty m_custom_axes_1 = new FlightProperty(-1.0f, 1.0f);
         public FlightProperty m_custom_axes_2 = new FlightProperty(-1.0f, 1.0f);
@@ -53,12 +60,14 @@ namespace KSPAdvancedFlyByWire
             m_Throttle.SetMinMaxValues(-state.mainThrottle, 1.0f - state.mainThrottle);
             m_WheelThrottle.SetMinMaxValues(-1.0f, 1.0f);
 
+
             foreach (ControllerConfiguration config in m_Configuration.controllers)
             {
                 if (config.isEnabled && !AdvancedFlyByWire.rightClickDisabled)
                 {
-                    config.iface.Update(state);
+                    throttleActive = true;
                     UpdateAxes(config, state);
+                    config.iface.Update(state);
 
                     if (FlightGlobals.ActiveVessel.isEVA)
                     {
@@ -96,6 +105,8 @@ namespace KSPAdvancedFlyByWire
                     state.roll = Utility.Clamp(state.roll + state.rollTrim, -1.0f, 1.0f);
                 }
             }
+
+            UpdateAxisGroups(FlightGlobals.ActiveVessel, state);
         }
 
         private void UpdateAxes(ControllerConfiguration config, FlightCtrlState state)
@@ -112,7 +123,7 @@ namespace KSPAdvancedFlyByWire
 
                 float axisState = config.iface.GetAxisState(i);
 
-                foreach (var action in actions)
+                foreach (ContinuousAction action in actions)
                 {
                     var axisValue = axisState;
                     if (config.GetCurrentPreset().IsContinuousBindingInverted(action))
@@ -120,13 +131,12 @@ namespace KSPAdvancedFlyByWire
                         axisValue *= -1.0f;
                     }
 
-
                     throttleActive = true;
                     if (!AdvancedFlyByWire.Instance.settings.m_ThrottleOverride && action == ContinuousAction.Throttle)
                     {
                         if (axisValue == last_m_throttle)
                         {
-                            throttleActive = false;
+                            //throttleActive = false;
                         }
                         else
                         {
@@ -201,6 +211,11 @@ namespace KSPAdvancedFlyByWire
             axisModule.SetAxisGroup(KSPAxisGroup.Custom03, state.custom_axes[2]);
             axisModule.SetAxisGroup(KSPAxisGroup.Custom04, state.custom_axes[3]);
 
+//            for (int i = 0; i < Math.Min(m_CustomAxes.Length, state.custom_axes.Length); ++i)
+//            {
+//                state.custom_axes[i] = Utility.Clamp(state.custom_axes[i] + m_CustomAxes[i].Update(), -1.0f, 1.0f);
+//            }
+
         }
 
         private void ZeroOutFlightProperties()
@@ -267,6 +282,7 @@ namespace KSPAdvancedFlyByWire
                 m_CameraZoom.SetValue(0.0f);
             }
 
+
             if (!m_custom_axes_1.HasIncrement())
             {
                 m_custom_axes_1.SetValue(0.0f);
@@ -285,6 +301,7 @@ namespace KSPAdvancedFlyByWire
             if (!m_custom_axes_4.HasIncrement())
             {
                 m_custom_axes_4.SetValue(0.0f);
+
             }
         }
 
@@ -814,6 +831,18 @@ namespace KSPAdvancedFlyByWire
                     return;
                 case ContinuousAction.CameraZoom:
                     m_CameraZoom.Increment(value);
+                    return;
+                case ContinuousAction.Custom1:
+                    m_CustomAxes[0].SetValue(value);
+                    return;
+                case ContinuousAction.Custom2:
+                    m_CustomAxes[1].SetValue(value);
+                    return;
+                case ContinuousAction.Custom3:
+                    m_CustomAxes[2].SetValue(value);
+                    return;
+                case ContinuousAction.Custom4:
+                    m_CustomAxes[3].SetValue(value);
                     return;
             }
         }

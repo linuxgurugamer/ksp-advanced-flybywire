@@ -221,7 +221,7 @@ namespace KSPAdvancedFlyByWire
             GameEvents.onGameStateSave.Remove(SaveState);
             GameEvents.onGameStateLoad.Remove(LoadState);
             GameEvents.onGUIRecoveryDialogSpawn.Remove(OnGUIRecoveryDialogSpawn);
-            GameEvents.onGUIRecoveryDialogSpawn.Remove(OnGUIRecoveryDialogDespawn);
+            GameEvents.onGUIRecoveryDialogDespawn.Remove(OnGUIRecoveryDialogDespawn);
 
             GameEvents.onVesselChange.Remove(OnVesselChange);
             GameEvents.onVesselSwitching.Remove(OnVesselSwitching);

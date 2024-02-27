@@ -25,8 +25,9 @@ namespace KSPAdvancedFlyByWire
         {
             ControllerPreset preset = new ControllerPreset();
             preset.name = "XInput Default";
-            
+
 #if !LINUX && !OSX
+
             int buttonsCount = controller.GetButtonsCount();
 
             preset.SetDiscreteBinding(new Bitset(buttonsCount, (int)XInput.Button.DPadLeft), DiscreteAction.SAS);

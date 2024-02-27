@@ -115,7 +115,11 @@ namespace KSPAdvancedFlyByWire
         WheelThrottleTrim,
         CameraX,
         CameraY,
-        CameraZoom
+        CameraZoom,
+        Custom1,
+        Custom2,
+        Custom3,
+        Custom4,
     }
 
     public class ControllerPreset

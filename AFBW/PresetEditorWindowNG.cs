@@ -123,10 +123,10 @@ namespace KSPAdvancedFlyByWire
 
         public void DoChooseContinuousActionWindow(int window)
         {
-            if (!m_ChooseContinuousAction)
-            {
-                return;
-            }
+            //if (!m_ChooseContinuousAction)
+            //{
+            //    return;
+            //}
             GUILayout.BeginHorizontal();
             var currentPreset = m_Controller.GetCurrentPreset();
             GUILayout.FlexibleSpace();

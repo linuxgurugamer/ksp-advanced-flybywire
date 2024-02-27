@@ -148,7 +148,11 @@ namespace KSPAdvancedFlyByWire
         CustomAxis4,
         CameraX,
         CameraY,
-        CameraZoom
+        CameraZoom,
+        Custom1,
+        Custom2,
+        Custom3,
+        Custom4,
     }
 
     public class DiscreteActionEntry
@@ -212,7 +216,7 @@ namespace KSPAdvancedFlyByWire
         public void OnPostDeserialize()
         {
             continuousActionsMap.Clear();
-            foreach(var entry in serialiazableContinuousActionList)
+            foreach(ContinuousActionEntry entry in serialiazableContinuousActionList)
             {
                 continuousActionsMap.Add(entry.Action, entry);
             }
