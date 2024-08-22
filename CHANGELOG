@@ -1,5 +1,10 @@
 ChangeLog
 
+1.8.4.2
+	Thanks to github user @archiecarrot123 for this:
+		On Linux, changes the libSDL2 version to a generic version (fixes compatibility with different versions of libSDL2)
+	Updated KSP versions in the version file, and URL for mod reference 
+
 1.8.4.1
 	Fixed issue where buttons to change throttle weren't working unless there was at least one axis defined
 
