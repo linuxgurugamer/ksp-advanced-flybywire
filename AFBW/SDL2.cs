@@ -40,7 +40,7 @@ namespace SDL2
 		#region SDL2# Variables
 
 #if LINUX
-		private const string nativeLibName = "libSDL2-2.14";
+		private const string nativeLibName = "libSDL2";
 #elif OSX
 		private const string nativeLibName = "libSDL2-2.0.14";
 #else
