@@ -91,7 +91,6 @@ ChangeLog
 	Added a DragWindow to the Choose Action windows, and fixed the call to properly save the location
 	Added OSX build
 
-
 1.8.0.2
 	Updated name in .version file
 	Updated Jenkins file for Linux build
