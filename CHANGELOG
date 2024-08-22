@@ -95,7 +95,7 @@ ChangeLog
 	Updated name in .version file
 	Updated Jenkins file for Linux build
 	Added missing file for Linux
-
+	 
 1.8.0.1
 	Rebuild for bad dll
 	Moved XInputDotNetPure dll into Plugins folder
