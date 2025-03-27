@@ -1,6 +1,6 @@
 ChangeLog
 
-1.4.8.3
+1.8.4.3
 	Thanks to github user @archiecarrot123 for this:
 		Change libSDL2 to libSDL2-2.0.so.0
 			Note from contributer:
