@@ -1,5 +1,11 @@
 ChangeLog
 
+1.4.8.3
+	Thanks to github user @archiecarrot123 for this:
+		Change libSDL2 to libSDL2-2.0.so.0
+			Note from contributer:
+			It turns out that libSDL2.so is not present under all distros, but it appears that libSDL2-2.0.so.0 is
+
 1.8.4.2
 	Thanks to github user @archiecarrot123 for this:
 		On Linux, changes the libSDL2 version to a generic version (fixes compatibility with different versions of libSDL2)
