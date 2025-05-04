@@ -1,5 +1,16 @@
 ChangeLog
 
+1.8.4.3
+	Thanks to github user @archiecarrot123 for this:
+		Change libSDL2 to libSDL2-2.0.so.0
+			Note from contributer:
+			It turns out that libSDL2.so is not present under all distros, but it appears that libSDL2-2.0.so.0 is
+
+1.8.4.2
+	Thanks to github user @archiecarrot123 for this:
+		On Linux, changes the libSDL2 version to a generic version (fixes compatibility with different versions of libSDL2)
+	Updated KSP versions in the version file, and URL for mod reference 
+
 1.8.4.1
 	Fixed issue where buttons to change throttle weren't working unless there was at least one axis defined
 
@@ -86,12 +97,11 @@ ChangeLog
 	Added a DragWindow to the Choose Action windows, and fixed the call to properly save the location
 	Added OSX build
 
-
 1.8.0.2
 	Updated name in .version file
 	Updated Jenkins file for Linux build
 	Added missing file for Linux
-
+	 
 1.8.0.1
 	Rebuild for bad dll
 	Moved XInputDotNetPure dll into Plugins folder

@@ -11,12 +11,5 @@ ksp/
 ksp2/
 .vs
 *~
-ksp-advanced-flybywire.sln
-controller_test_tool/ControllerTestTool/Properties/Settings.Designer.cs
-controller_test_tool/ControllerTestTool/Properties/Resources.Designer.cs
-controller_test_tool/ControllerTestTool/ControllerTestTool.csproj
-controller_test_tool/ControllerTestTool/App.config
-AFBW/ksp-advanced-flybywire_win.csproj
-AFBW/ksp-advanced-flybywire-osx.csproj
-AFBW/ksp-advanced-flybywire-linux.csproj
-AFBW/AssemblyVersion.cs
+*.dll
+*.pdb
