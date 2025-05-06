@@ -1,5 +1,9 @@
 ChangeLog
 
+1.8.4.4
+	Thanks to github user @Jonathon594 for this:
+		Add check for vessel control state for the flight control axises.  does not affect action groups
+
 1.8.4.3
 	Thanks to github user @archiecarrot123 for this:
 		Change libSDL2 to libSDL2-2.0.so.0
