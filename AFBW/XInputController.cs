@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 
 using XInputDotNetPure;
@@ -81,7 +82,7 @@ namespace KSPAdvancedFlyByWire
 
         public override string GetControllerName()
         {
-            return "XInput #" + m_ControllerIndex.ToString();
+            return "XInput #" + m_ControllerIndex.ToString(); // NO_LOCALIZATION
         }
 
         public static List<KeyValuePair<int, string>> EnumerateControllers()
@@ -92,7 +93,7 @@ namespace KSPAdvancedFlyByWire
             {
                 if (GamePad.GetState((PlayerIndex)i).IsConnected)
                 {
-                    controllers.Add(new KeyValuePair<int, string>(i, String.Format("XInput Controller #{0}", i)));
+                    controllers.Add(new KeyValuePair<int, string>(i, String.Format("XInput Controller #{0}", i))); // NO_LOCALIZATION
                 }
             }
 
@@ -132,37 +133,37 @@ namespace KSPAdvancedFlyByWire
             switch ((XInput.Button)(1 << id))
             {
             case XInput.Button.DPadLeft:
-                return "D-Pad Left";
+                return Localizer.Format("#LOC_AFBW_D_Pad_Left");
             case XInput.Button.DPadRight:
-                return "D-Pad Right";
+                return Localizer.Format("#LOC_AFBW_D_Pad_Right");
             case XInput.Button.DPadUp:
-                return "D-Pad Up";
+                return Localizer.Format("#LOC_AFBW_D_Pad_Up");
             case XInput.Button.DPadDown:
-                return "D-Pad Down";
+                return Localizer.Format("#LOC_AFBW_D_Pad_Down");
             case XInput.Button.Back:
-                return "Back";
+                return Localizer.Format("#LOC_AFBW_Back");
             case XInput.Button.Start:
-                return "Start";
+                return Localizer.Format("#LOC_AFBW_Start");
             case XInput.Button.LB:
-                return "LB";
+                return Localizer.Format("#LOC_AFBW_LB");
             case XInput.Button.RB:
-                return "RB";
+                return Localizer.Format("#LOC_AFBW_RB");
             case XInput.Button.X:
                 return "X";
             case XInput.Button.Y:
-                return "Y";
+                return Localizer.Format("#LOC_AFBW_Y");
             case XInput.Button.A:
-                return "A";
+                return Localizer.Format("#LOC_AFBW_A");
             case XInput.Button.B:
-                return "B";
+                return Localizer.Format("#LOC_AFBW_B");
             case XInput.Button.LeftStick:
-                return "Left Stick (press)";
+                return Localizer.Format("#LOC_AFBW_Left_Stick_press");
             case XInput.Button.RightStick:
-                return "Right Stick (press)";
+                return Localizer.Format("#LOC_AFBW_Right_Stick_press");
             case XInput.Button.Guide:
-                return "Guide";
+                return Localizer.Format("#LOC_AFBW_Guide");
             default:
-                return "bad index - " + id.ToString();
+                return Localizer.Format("#LOC_AFBW_bad_index") + id.ToString();
             }
         }
 
@@ -176,17 +177,17 @@ namespace KSPAdvancedFlyByWire
             switch ((XInput.AnalogInput)id)
             {
                 case XInput.AnalogInput.LeftStickX:
-                    return "Left Stick X";
+                    return Localizer.Format("#LOC_AFBW_Left_Stick_X");
                 case XInput.AnalogInput.LeftStickY:
-                    return "Left Stick Y";
+                    return Localizer.Format("#LOC_AFBW_Left_Stick_Y");
                 case XInput.AnalogInput.RightStickX:
-                    return "Right Stick X";
+                    return Localizer.Format("#LOC_AFBW_Right_Stick_X");
                 case XInput.AnalogInput.RightStickY:
-                    return "Right Stick Y";
+                    return Localizer.Format("#LOC_AFBW_Right_Stick_Y");
                 case XInput.AnalogInput.LeftTrigger:
-                    return "Left Trigger";
+                    return Localizer.Format("#LOC_AFBW_Left_Trigger");
                 case XInput.AnalogInput.RightTrigger:
-                    return "Right Trigger";
+                    return Localizer.Format("#LOC_AFBW_Right_Trigger");
             }
 
             return "";

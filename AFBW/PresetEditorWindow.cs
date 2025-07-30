@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -38,7 +39,7 @@ namespace KSPAdvancedFlyByWire
             m_Controller = controller;
             m_EditorId = editorId;
             axisSnapshot = new float[controller.iface.GetAxesCount()];
-            inputLockHash = "PresetEditor " + m_Controller.wrapper.ToString() + " - " + m_Controller.controllerIndex.ToString();
+            inputLockHash = "PresetEditor " + m_Controller.wrapper.ToString() + " - " + m_Controller.controllerIndex.ToString(); // NO_LOCALIZATION
         }
 
         public void SetCurrentBitmask(Bitset mask)
@@ -71,7 +72,7 @@ namespace KSPAdvancedFlyByWire
             var currentPreset = m_Controller.GetCurrentPreset();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Preset: ");
+            GUILayout.Label(Localizer.Format("#LOC_AFBW_Preset"));
 
             currentPreset.name = GUILayout.TextField(currentPreset.name, GUILayout.Width(256));
 
@@ -91,16 +92,16 @@ namespace KSPAdvancedFlyByWire
             }
             GUI.enabled = true;
 
-            if (GUILayout.Button("New"))
+            if (GUILayout.Button(Localizer.Format("#LOC_AFBW_New")))
             {
                 m_Controller.presets.Add(new ControllerPreset());
                 m_Controller.currentPreset = m_Controller.presets.Count - 1;
             }
 
-            string destructiveRemoveLabel = "Delete";
+            string destructiveRemoveLabel = Localizer.Format("#LOC_AFBW_Delete");
             if (m_DestructiveActionWait)
             {
-                destructiveRemoveLabel = "Sure?";
+                destructiveRemoveLabel = Localizer.Format("#LOC_AFBW_Sure");
             }
 
             if (m_Controller.presets.Count <= 1 || m_Controller.currentPreset == 0)
@@ -155,7 +156,7 @@ namespace KSPAdvancedFlyByWire
                 var axisBitsetPair = currentPreset.GetBitsetForContinuousBinding(action);
                 if (m_CurrentlyEditingContinuousAction == action)
                 {
-                    label = "Press desired combination";
+                    label = Localizer.Format("#LOC_AFBW_Press_desired_combination");
 
                     var buttonsMask = m_Controller.iface.GetButtonsMask();
 
@@ -174,7 +175,7 @@ namespace KSPAdvancedFlyByWire
                 {
                     if (axisBitsetPair.Value == null)
                     {
-                        label = "Click to assign";
+                        label = Localizer.Format("#LOC_AFBW_Click_to_assign");
                     }
                     else
                     {
@@ -203,7 +204,7 @@ namespace KSPAdvancedFlyByWire
 
                 var inverted = GUILayout.Toggle(currentPreset.IsContinuousBindingInverted(action), "");
                 currentPreset.SetContinuousBindingInverted(action, inverted);
-                GUILayout.Label("Invert");
+                GUILayout.Label(Localizer.Format("#LOC_AFBW_Invert"));
 
                 GUILayout.Space(8);
 
@@ -236,7 +237,7 @@ namespace KSPAdvancedFlyByWire
                 var bitset = currentPreset.GetBitsetForDiscreteBinding(action);
                 if (m_CurrentlyEditingDiscreteAction == action)
                 {
-                    label = "Press desired combination";
+                    label = Localizer.Format("#LOC_AFBW_Press_desired_combination");
 
                     if (m_CurrentMask != null && m_ClickSleepTimer == 0.0f)
                     {
@@ -251,7 +252,7 @@ namespace KSPAdvancedFlyByWire
                 {
                     if (bitset == null)
                     {
-                        label = "Click to assign";
+                        label = Localizer.Format("#LOC_AFBW_Click_to_assign");
                     }
                     else
                     {
@@ -323,7 +324,7 @@ namespace KSPAdvancedFlyByWire
                 InputLockManager.RemoveControlLock(inputLockHash);
             }
 
-            windowRect = ClickThruBlocker.GUIWindow(1337 + m_EditorId, windowRect, DoWindow, "Fly-By-Wire Preset Editor");
+            windowRect = ClickThruBlocker.GUIWindow(1337 + m_EditorId, windowRect, DoWindow, Localizer.Format("#LOC_AFBW_Fly_By_Wire_Preset_Editor"));
             windowRect = Utility.ClampRect(windowRect, new Rect(0, 0, Screen.width, Screen.height));
         }
 

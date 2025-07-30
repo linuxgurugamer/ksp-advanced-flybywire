@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -18,13 +19,13 @@ namespace KSPAdvancedFlyByWire
 
         public override string GetControllerName()
         {
-            return "Keyboard";
+            return Localizer.Format("#LOC_AFBW_Keyboard");
         }
 
         public override void Update(FlightCtrlState state)
         {
-            m_MouseDeltaX = Input.GetAxis("Mouse X") / Screen.width;
-            m_MouseDeltaY = Input.GetAxis("Mouse Y") / Screen.height;
+            m_MouseDeltaX = Input.GetAxis(Localizer.Format("#LOC_AFBW_Mouse_X")) / Screen.width;
+            m_MouseDeltaY = Input.GetAxis(Localizer.Format("#LOC_AFBW_Mouse_Y")) / Screen.height;
             base.Update(state);
         }
 
@@ -48,9 +49,9 @@ namespace KSPAdvancedFlyByWire
             switch (id)
             {
                 case 0:
-                    return "Mouse X";
+                    return Localizer.Format("#LOC_AFBW_Mouse_X");
                 case 1:
-                    return "Mouse Y";
+                    return Localizer.Format("#LOC_AFBW_Mouse_Y");
                 default:
                     return "";
             }

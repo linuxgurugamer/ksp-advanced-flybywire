@@ -56,12 +56,12 @@ namespace KSPAdvancedFlyByWire
             {
                 if(Get(i))
                 {
-                    result = "1" + result;
+                    result = "1" + result; // NO_LOCALIZATION
                 }
                 else
                 {
                     result = "0" + result;
-                }
+                } // NO_LOCALIZATION
             }
 
             return result;

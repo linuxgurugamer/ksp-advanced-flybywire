@@ -35,7 +35,7 @@ using System.Text;
 
 namespace SDL2
 {
-	public static class SDL
+    public static class SDL
 	{
 		#region SDL2# Variables
 
@@ -465,11 +465,13 @@ namespace SDL2
 			return UTF8_ToManaged(INTERNAL_SDL_GetPlatform());
 		}
 
-		#endregion
+        #endregion
 
-		#region SDL_hints.h
 
-		public const string SDL_HINT_FRAMEBUFFER_ACCELERATION =
+        #region SDL_hints.h
+        #region  NO_LOCALIZATION
+
+        public const string SDL_HINT_FRAMEBUFFER_ACCELERATION =
 			"SDL_FRAMEBUFFER_ACCELERATION";
 		public const string SDL_HINT_RENDER_DRIVER =
 			"SDL_RENDER_DRIVER";
@@ -685,8 +687,9 @@ namespace SDL2
 			"SDL_MOUSE_RELATIVE_SCALING";
 		public const string SDL_HINT_JOYSTICK_HIDAPI_PS5_RUMBLE =
 			"SDL_JOYSTICK_HIDAPI_PS5_RUMBLE";
+        #endregion
 
-		public enum SDL_HintPriority
+        public enum SDL_HintPriority
 		{
 			SDL_HINT_DEFAULT,
 			SDL_HINT_NORMAL,

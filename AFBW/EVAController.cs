@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -160,7 +161,7 @@ namespace KSPAdvancedFlyByWire
                         {
                             foreach (var item in eva.fsm.CurrentState.StateEvents)
                             {
-                                if (item.name == "Board Vessel")
+                                if (item.name == Localizer.Format("#LOC_AFBW_Board_Vessel"))
                                 {
                                     eva.fsm.RunEvent(item);
                                 }
@@ -174,7 +175,7 @@ namespace KSPAdvancedFlyByWire
                         {
                             foreach (var item in eva.fsm.CurrentState.StateEvents)
                             {
-                                if (item.name == "Ladder Grab Start")
+                                if (item.name == Localizer.Format("#LOC_AFBW_Ladder_Grab_Start"))
                                 {
                                     eva.fsm.RunEvent(item);
                                 }
@@ -203,7 +204,7 @@ namespace KSPAdvancedFlyByWire
                 {
                     foreach (var item in eva.fsm.CurrentState.StateEvents)
                     {
-                        if (item.name == "Ladder Let Go")
+                        if (item.name == Localizer.Format("#LOC_AFBW_Ladder_Let_Go"))
                         {
                             eva.fsm.RunEvent(item);
                         }
@@ -217,7 +218,7 @@ namespace KSPAdvancedFlyByWire
                 {
                     foreach (var item in eva.fsm.CurrentState.StateEvents)
                     {
-                        if (item.name == "Jump Start")
+                        if (item.name == Localizer.Format("#LOC_AFBW_Jump_Start"))
                         {
                             eva.fsm.RunEvent(item);
                         }
@@ -247,7 +248,7 @@ namespace KSPAdvancedFlyByWire
             {
                 foreach (var item in eva.fsm.CurrentState.StateEvents)
                 {
-                    if (item.name == "Pack Toggle")
+                    if (item.name == Localizer.Format("#LOC_AFBW_Pack_Toggle"))
                     {
                         eva.fsm.RunEvent(item);
                     }
@@ -273,7 +274,7 @@ namespace KSPAdvancedFlyByWire
                     {
                         foreach (var item in eva.fsm.CurrentState.StateEvents)
                         {
-                            if (item.name == "Start Run")
+                            if (item.name == Localizer.Format("#LOC_AFBW_Start_Run"))
                             {
                                 eva.fsm.RunEvent(item);
                             }
@@ -289,7 +290,7 @@ namespace KSPAdvancedFlyByWire
                     {
                         foreach (var item in eva.fsm.CurrentState.StateEvents)
                         {
-                            if (item.name == "End Run")
+                            if (item.name == Localizer.Format("#LOC_AFBW_End_Run"))
                             {
                                 eva.fsm.RunEvent(item);
                             }
@@ -315,7 +316,7 @@ namespace KSPAdvancedFlyByWire
         public void ToggleAutorun()
         {
             this.m_autoRunning = !this.m_autoRunning;
-            ScreenMessages.PostScreenMessage("AutoRun: " + (this.m_autoRunning ? "ON" : "OFF"), 2f, ScreenMessageStyle.LOWER_CENTER);
+            ScreenMessages.PostScreenMessage(Localizer.Format("#LOC_AFBW_AutoRun") + (this.m_autoRunning ? Localizer.Format("#LOC_AFBW_ON") : Localizer.Format("#LOC_AFBW_OFF")), 2f, ScreenMessageStyle.LOWER_CENTER);
         }
 
         public void GoEVA()
@@ -354,7 +355,7 @@ namespace KSPAdvancedFlyByWire
                 {
                     foreach (var item in eva.fsm.CurrentState.StateEvents)
                     {
-                        if (item.name == "End Run")
+                        if (item.name == Localizer.Format("#LOC_AFBW_End_Run"))
                         {
                             this.runStopCondition = item.OnCheckCondition;
                             item.OnCheckCondition = this.eventConditionDisabled;
@@ -375,7 +376,7 @@ namespace KSPAdvancedFlyByWire
                 {
                     foreach (var item in eva.fsm.CurrentState.StateEvents)
                     {
-                        if (item.name == "Ladder Stop")
+                        if (item.name == Localizer.Format("#LOC_AFBW_Ladder_Stop"))
                         {
                             this.ladderStopCondition = item.OnCheckCondition;
                             item.OnCheckCondition = this.eventConditionDisabled;
@@ -396,7 +397,7 @@ namespace KSPAdvancedFlyByWire
                 {
                     foreach (var item in eva.fsm.CurrentState.StateEvents)
                     {
-                        if (item.name == "Swim Stop")
+                        if (item.name == Localizer.Format("#LOC_AFBW_Swim_Stop"))
                         {
                             this.swimStopCondition = item.OnCheckCondition;
                             item.OnCheckCondition = this.eventConditionDisabled;
@@ -417,7 +418,7 @@ namespace KSPAdvancedFlyByWire
                 {
                     foreach (var item in eva.fsm.CurrentState.StateEvents)
                     {
-                        if (item.name == "Ladder Stop")
+                        if (item.name == Localizer.Format("#LOC_AFBW_Ladder_Stop"))
                         {
                             item.OnCheckCondition = this.ladderStopCondition;
                         }
@@ -435,7 +436,7 @@ namespace KSPAdvancedFlyByWire
                 {
                     foreach (var item in eva.fsm.CurrentState.StateEvents)
                     {
-                        if (item.name == "Swim Stop")
+                        if (item.name == Localizer.Format("#LOC_AFBW_Swim_Stop"))
                         {
                             item.OnCheckCondition = this.swimStopCondition;
                         }
@@ -453,7 +454,7 @@ namespace KSPAdvancedFlyByWire
                 {
                     foreach (var item in eva.fsm.CurrentState.StateEvents)
                     {
-                        if (item.name == "End Run")
+                        if (item.name == Localizer.Format("#LOC_AFBW_End_Run"))
                         {
                             item.OnCheckCondition = this.runStopCondition;
                         }

@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,7 +48,7 @@ namespace KSPAdvancedFlyByWire
                 return;
             }
 
-            GUI.Window(1338, new Rect(position.x, position.y, size.x, size.y), DoWindow, "Fly-By-Wire Preset Editor");
+            GUI.Window(1338, new Rect(position.x, position.y, size.x, size.y), DoWindow, Localizer.Format("#LOC_AFBW_Fly_By_Wire_Preset_Editor"));
         }
 
 

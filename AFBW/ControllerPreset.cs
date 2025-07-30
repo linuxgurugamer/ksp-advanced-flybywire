@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
@@ -174,7 +175,7 @@ namespace KSPAdvancedFlyByWire
     public class ControllerPreset
     {
 
-        public string name = "New preset";
+        public string name = Localizer.Format("#LOC_AFBW_New_preset");
 
         public delegate void OnCustomActionCallback();
 

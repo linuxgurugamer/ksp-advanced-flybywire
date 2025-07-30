@@ -77,7 +77,7 @@ namespace SDL2
             var str = ManagedObj as string;
             if (str == null)
             {
-                throw new ArgumentException("ManagedObj must be a string.", "ManagedObj");
+                throw new ArgumentException("ManagedObj must be a string.", "ManagedObj"); // NO_LOCALIZATION
             }
             var bytes = Encoding.UTF8.GetBytes(str);
             var mem = Marshal.AllocHGlobal(bytes.Length + 1);

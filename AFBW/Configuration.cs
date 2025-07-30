@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 
 using System.IO;
@@ -53,7 +54,7 @@ namespace KSPAdvancedFlyByWire
 
             if(preset == null)
             {
-                MonoBehaviour.print("Advanced Fly-By-Wire: null preset error");
+                MonoBehaviour.print("Advanced Fly-By-Wire: null preset error"); // NO_LOCALIZATION
             }
 
             return preset;
@@ -135,7 +136,7 @@ namespace KSPAdvancedFlyByWire
 
             controllers.Add(controller);
 
-            ScreenMessages.PostScreenMessage("CONTROLLER: " + controller.iface.GetControllerName(), 1.0f, ScreenMessageStyle.UPPER_CENTER);
+            ScreenMessages.PostScreenMessage(Localizer.Format("#LOC_AFBW_CONTROLLER") + controller.iface.GetControllerName(), 1.0f, ScreenMessageStyle.UPPER_CENTER);
         }
 
         public void DeactivateController(InputWrapper wrapper, int controllerIndex)

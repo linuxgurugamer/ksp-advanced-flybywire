@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using UnityEngine;
 using ClickThroughFix;
 
@@ -26,7 +27,7 @@ namespace KSPAdvancedFlyByWire
             m_Controller = controller;
             m_EditorId = editorId;
 
-            inputLockHash = "Controller Configuration (" + m_Controller.wrapper.ToString() + " - " + m_Controller.controllerIndex.ToString() + ")";
+            inputLockHash = Localizer.Format("#LOC_AFBW_Controller_Configuration") + m_Controller.wrapper.ToString() + " - " + m_Controller.controllerIndex.ToString() + ")";
         }
 
         private bool FloatField(float value, out float retValue)
@@ -68,14 +69,14 @@ namespace KSPAdvancedFlyByWire
             GUILayout.EndHorizontal();
             
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Show additional options");
+            GUILayout.Label(Localizer.Format("#LOC_AFBW_Show_additional_options"));
             m_ShowOptions = GUILayout.Toggle(m_ShowOptions, "");
             GUILayout.EndHorizontal();
             
             if (m_ShowOptions)
             {
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Discrete action step");
+                GUILayout.Label(Localizer.Format("#LOC_AFBW_Discrete_action_step"));
                 GUILayout.FlexibleSpace();
                 FloatField(m_Controller.discreteActionStep, out m_Controller.discreteActionStep);
                 GUILayout.EndHorizontal();
@@ -83,7 +84,7 @@ namespace KSPAdvancedFlyByWire
                 GUILayout.Space(8);
 
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Incremental action sensitivity");
+                GUILayout.Label(Localizer.Format("#LOC_AFBW_Incremental_action_sensit"));
                 GUILayout.FlexibleSpace();
                 FloatField(m_Controller.incrementalActionSensitivity, out m_Controller.incrementalActionSensitivity);
                 GUILayout.EndHorizontal();
@@ -91,7 +92,7 @@ namespace KSPAdvancedFlyByWire
                 GUILayout.Space(8);
 
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Camera sensitivity");
+                GUILayout.Label(Localizer.Format("#LOC_AFBW_Camera_sensitivity"));
                 GUILayout.FlexibleSpace();
                 FloatField(m_Controller.cameraSensitivity, out m_Controller.cameraSensitivity);
                 GUILayout.EndHorizontal();
@@ -102,14 +103,14 @@ namespace KSPAdvancedFlyByWire
                 GUILayout.Label("Analog input curve");
                 GUILayout.FlexibleSpace();
 
-                string curveLabel = "Quadratic";
+                string curveLabel = Localizer.Format("#LOC_AFBW_Quadratic");
                 if (m_Controller.analogInputCurve == CurveType.Identity)
                 {
-                    curveLabel = "Linear";
+                    curveLabel = Localizer.Format("#LOC_AFBW_Linear");
                 }
                 else if (m_Controller.analogInputCurve == CurveType.SqrtX)
                 {
-                    curveLabel = "Quadratic (Inverted)";
+                    curveLabel = Localizer.Format("#LOC_AFBW_Quadratic_Inverted");
                 }
 
                 if (GUILayout.Button(curveLabel))
@@ -133,7 +134,7 @@ namespace KSPAdvancedFlyByWire
                 GUILayout.Space(8);
 
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Treat hats as buttons (requires restart)");
+                GUILayout.Label(Localizer.Format("#LOC_AFBW_Treat_hats_as_buttons_req"));
                 GUILayout.FlexibleSpace();
                 var state = GUILayout.Toggle(m_Controller.treatHatsAsButtons, "");
                 if (state != m_Controller.treatHatsAsButtons)
@@ -145,7 +146,7 @@ namespace KSPAdvancedFlyByWire
 
                 GUILayout.Space(8);
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Manual dead-zones");
+                GUILayout.Label(Localizer.Format("#LOC_AFBW_Manual_dead_zones"));
                 GUILayout.FlexibleSpace();
                 state = GUILayout.Toggle(m_Controller.manualDeadZones, "");
                 if (state != m_Controller.manualDeadZones)
@@ -156,11 +157,11 @@ namespace KSPAdvancedFlyByWire
                 GUILayout.EndHorizontal();
             }
 
-            GUILayout.Label("If some axes below are not displaying 0.0 when the controller is left untouched then it needs calibration.");
-            GUILayout.Label("Leave the controller and press calibrate, then move around all the axes");
+            GUILayout.Label(Localizer.Format("#LOC_AFBW_If_some_axes_below_are_no"));
+            GUILayout.Label(Localizer.Format("#LOC_AFBW_Leave_the_controller_and_"));
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Calibrate"))
+            if (GUILayout.Button(Localizer.Format("#LOC_AFBW_Calibrate")))
             {
                 m_Controller.SetManualDeadZones(false);
 
@@ -179,7 +180,7 @@ namespace KSPAdvancedFlyByWire
 
             m_ScrollPosition = GUILayout.BeginScrollView(m_ScrollPosition);
 
-            GUILayout.Label("Axes");
+            GUILayout.Label(Localizer.Format("#LOC_AFBW_Axes"));
 
             for (int i = 0; i < m_Controller.iface.GetAxesCount(); i++)
             {
@@ -214,7 +215,7 @@ namespace KSPAdvancedFlyByWire
                     }
                     
                     GUILayout.BeginHorizontal();
-                    GUILayout.Label("Negative dead-zone");
+                    GUILayout.Label(Localizer.Format("#LOC_AFBW_Negative_dead_zone"));
                     GUILayout.FlexibleSpace();
 
                     var negativeDeadZone = Mathf.Clamp(m_Controller.iface.axisStates[i].m_NegativeDeadZone, 0.0f, 1.0f);
@@ -225,7 +226,7 @@ namespace KSPAdvancedFlyByWire
                     GUILayout.EndHorizontal();
 
                     GUILayout.BeginHorizontal();
-                    GUILayout.Label("Positive dead-zone");
+                    GUILayout.Label(Localizer.Format("#LOC_AFBW_Positive_dead_zone"));
 
                     GUILayout.FlexibleSpace();
                     GUILayout.Label(positiveDeadZone.ToString("0.000"));
@@ -239,7 +240,7 @@ namespace KSPAdvancedFlyByWire
                 }
             }
 
-            GUILayout.Label("Buttons");
+            GUILayout.Label(Localizer.Format("#LOC_AFBW_Buttons"));
 
             for (int i = 0; i < m_Controller.iface.GetButtonsCount(); i++)
             {

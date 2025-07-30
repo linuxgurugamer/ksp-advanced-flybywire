@@ -1,8 +1,13 @@
 ChangeLog
 
+1.8.4.5 
+	Thanks to github user @NateSaxo for this:
+		Change libSDL2-2.0.14 to libSDL2-2.0.0 for OS X
+	Localized the strings in the mod
+
 1.8.4.4
 	Thanks to github user @Jonathon594 for this:
-		Add check for vessel control state for the flight control axises.  does not affect action groups
+		Add check for vessel control state for the flight control axises.  Does not affect action groups
 
 1.8.4.3
 	Thanks to github user @archiecarrot123 for this:

@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -317,7 +318,7 @@ namespace KSPAdvancedFlyByWire
                     }
 
                     controller.currentPreset++;
-                    ScreenMessages.PostScreenMessage("PRESET: " + controller.GetCurrentPreset().name.ToUpper(), 1.0f, ScreenMessageStyle.UPPER_CENTER);
+                    ScreenMessages.PostScreenMessage(Localizer.Format("#LOC_AFBW_PRESET") + controller.GetCurrentPreset().name.ToUpper(), 1.0f, ScreenMessageStyle.UPPER_CENTER);
                     return;
                 case DiscreteAction.PreviousPreset:
                     if (controller.currentPreset <= 0)
@@ -326,7 +327,7 @@ namespace KSPAdvancedFlyByWire
                     }
 
                     controller.currentPreset--;
-                    ScreenMessages.PostScreenMessage("PRESET: " + controller.GetCurrentPreset().name.ToUpper(), 1.0f, ScreenMessageStyle.UPPER_CENTER);
+                    ScreenMessages.PostScreenMessage(Localizer.Format("#LOC_AFBW_PRESET") + controller.GetCurrentPreset().name.ToUpper(), 1.0f, ScreenMessageStyle.UPPER_CENTER);
                     return;
                 case DiscreteAction.CyclePresets:
                     controller.currentPreset++;
@@ -334,7 +335,7 @@ namespace KSPAdvancedFlyByWire
                     {
                         controller.currentPreset = 0;
                     }
-                    ScreenMessages.PostScreenMessage("PRESET: " + controller.GetCurrentPreset().name.ToUpper(), 1.0f, ScreenMessageStyle.LOWER_CENTER);
+                    ScreenMessages.PostScreenMessage(Localizer.Format("#LOC_AFBW_PRESET") + controller.GetCurrentPreset().name.ToUpper(), 1.0f, ScreenMessageStyle.LOWER_CENTER);
                     return;
                 case DiscreteAction.CameraZoomPlus:
                     m_CameraZoom.SetIncrement(1, controller.discreteActionStep);

@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 
 namespace KSPAdvancedFlyByWire
@@ -24,7 +25,7 @@ namespace KSPAdvancedFlyByWire
         public static ControllerPreset GetXInputDefaultRocketPreset(IController controller)
         {
             ControllerPreset preset = new ControllerPreset();
-            preset.name = "XInput Default";
+            preset.name = Localizer.Format("#LOC_AFBW_XInput_Default");
 
 #if !LINUX && !OSX
 

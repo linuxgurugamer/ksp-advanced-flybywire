@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 
 namespace KSPAdvancedFlyByWire
@@ -50,7 +51,7 @@ namespace KSPAdvancedFlyByWire
                 }
             }
 
-            controllers.Add(new KeyValuePair<InputWrapper, KeyValuePair<int, string>>(InputWrapper.KeyboardMouse, new KeyValuePair<int, string>(0, "Keyboard & Mouse")));
+            controllers.Add(new KeyValuePair<InputWrapper, KeyValuePair<int, string>>(InputWrapper.KeyboardMouse, new KeyValuePair<int, string>(0, Localizer.Format("#LOC_AFBW_Keyboard_Mouse"))));
             return controllers;
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -90,7 +91,7 @@ namespace KSPAdvancedFlyByWire
         {
             if (m_Joystick == IntPtr.Zero)
             {
-                return "Uninitialized";
+                return Localizer.Format("#LOC_AFBW_Uninitialized");
             }
 
             return SDL.SDL_JoystickName(m_Joystick);
@@ -166,7 +167,7 @@ namespace KSPAdvancedFlyByWire
         {
             if (id < m_ButtonsCount)
             {
-                return String.Format("Button #{0}", id);
+                return String.Format( "Button #" + "{0}", id);
             }
 
             int hatId = (id - m_ButtonsCount) / 8;
@@ -174,10 +175,10 @@ namespace KSPAdvancedFlyByWire
             if (hatId < m_HatsCount)
             {
                 int buttonId = (id - m_ButtonsCount) % 8;
-                return String.Format("Hat #{0} Button {1}", hatId, buttonId);
+                return String.Format( "Hat #" + "{0} " + "Button" + " {1}", hatId, buttonId);
             }
 
-            return "unknown";
+            return Localizer.Format("#LOC_AFBW_unknown");
         }
 
         public override int GetAxesCount()
@@ -189,10 +190,10 @@ namespace KSPAdvancedFlyByWire
         {
             if (id < m_AxesCount)
             {
-                return String.Format("Axis #{0}", id);
+                return String.Format( "Axis #" + "{0}", id);
             }
          
-            return "unknown";
+            return Localizer.Format("#LOC_AFBW_unknown");
         }
 
         public override bool GetButtonState(int button)

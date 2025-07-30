@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,10 +33,10 @@ namespace KSPAdvancedFlyByWire
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
 
-            GUILayout.Label("Press desired combination");
+            GUILayout.Label(Localizer.Format("#LOC_AFBW_Press_desired_combination"));
             GUILayout.Space(8);
 
-            if(GUILayout.Button("Cancel"))
+            if(GUILayout.Button(Localizer.Format("#LOC_AFBW_Cancel")))
             {
                 m_CurrentlyEditingContinuousAction = ContinuousAction.None;
                 m_CurrentlyEditingDiscreteAction = DiscreteAction.None;
@@ -81,7 +82,7 @@ namespace KSPAdvancedFlyByWire
            
             var currentPreset = m_Controller.GetCurrentPreset();
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("Cancel", GUILayout.Width(m_ChooseDiscreteActionRect.width / 2)))
+            if (GUILayout.Button(Localizer.Format("#LOC_AFBW_Cancel"), GUILayout.Width(m_ChooseDiscreteActionRect.width / 2)))
             {
                 m_ChooseDiscreteAction = false;
                 return;
@@ -130,7 +131,7 @@ namespace KSPAdvancedFlyByWire
             GUILayout.BeginHorizontal();
             var currentPreset = m_Controller.GetCurrentPreset();
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("Cancel", GUILayout.Width(m_ChooseContinuousActionRect.width / 2)))
+            if (GUILayout.Button(Localizer.Format("#LOC_AFBW_Cancel"), GUILayout.Width(m_ChooseContinuousActionRect.width / 2)))
             {
                 m_ChooseContinuousAction = false;
                 return;
@@ -199,7 +200,7 @@ namespace KSPAdvancedFlyByWire
             var currentPreset = m_Controller.GetCurrentPreset();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Preset: ");
+            GUILayout.Label(Localizer.Format("#LOC_AFBW_Preset"));
 
             currentPreset.name = GUILayout.TextField(currentPreset.name, GUILayout.Width(256));
 
@@ -224,13 +225,13 @@ namespace KSPAdvancedFlyByWire
             GUI.enabled = true;
             
 
-            if (GUILayout.Button("New"))
+            if (GUILayout.Button(Localizer.Format("#LOC_AFBW_New")))
             {
                 m_Controller.presets.Add(new ControllerPreset());
                 m_Controller.currentPreset = m_Controller.presets.Count - 1;
             }
 
-            if (GUILayout.Button("Clone"))
+            if (GUILayout.Button(Localizer.Format("#LOC_AFBW_Clone")))
             {
                 var preset = m_Controller.presets[m_Controller.currentPreset];
                 var newPreset = new ControllerPreset();
@@ -249,10 +250,10 @@ namespace KSPAdvancedFlyByWire
                 m_Controller.currentPreset = m_Controller.presets.Count - 1;
             }
 
-            string destructiveRemoveLabel = "Delete";
+            string destructiveRemoveLabel = Localizer.Format("#LOC_AFBW_Delete");
             if (m_DestructiveActionWait)
             {
-                destructiveRemoveLabel = "Sure?";
+                destructiveRemoveLabel = Localizer.Format("#LOC_AFBW_Sure");
             }
 
             if (m_Controller.presets.Count <= 1 /*|| m_Controller.currentPreset == 0 */)
@@ -294,14 +295,14 @@ namespace KSPAdvancedFlyByWire
                 GUI.enabled = false;
             }
 
-            if (GUILayout.Button("Add button"))
+            if (GUILayout.Button(Localizer.Format("#LOC_AFBW_Add_button")))
             {
                 m_ChooseDiscreteAction = true;
                 //m_ChosenDiscreteAction = DiscreteAction.None;
                 m_ChooseDiscreteActionRect = new Rect(Input.mousePosition.x, Screen.height - Input.mousePosition.y, 256, 512);
             }
 
-            if (GUILayout.Button("Add axis"))
+            if (GUILayout.Button(Localizer.Format("#LOC_AFBW_Add_axis")))
             {
                 m_ChooseContinuousAction = true;
                 //m_ChosenContinuousAction = ContinuousAction.None;
@@ -336,7 +337,7 @@ namespace KSPAdvancedFlyByWire
                 string label = "";
                 if (m_CurrentlyEditingContinuousAction == action)
                 {
-                    label = "Press desired combination";
+                    label = Localizer.Format("#LOC_AFBW_Press_desired_combination");
 
                     var buttonsMask = m_Controller.iface.GetButtonsMask();
 
@@ -355,7 +356,7 @@ namespace KSPAdvancedFlyByWire
                 {
                     if (axisBitsetPair.Value == null)
                     {
-                        label = "Click to assign";
+                        label = Localizer.Format("#LOC_AFBW_Click_to_assign");
                     }
                     else
                     {
@@ -384,7 +385,7 @@ namespace KSPAdvancedFlyByWire
 
                 var inverted = GUILayout.Toggle(currentPreset.IsContinuousBindingInverted(action), "", GUILayout.Width(32));
                 currentPreset.SetContinuousBindingInverted(action, inverted);
-                GUILayout.Label("Invert", GUILayout.Width(40));
+                GUILayout.Label(Localizer.Format("#LOC_AFBW_Invert"), GUILayout.Width(40));
 
                 GUILayout.Space(8);
 
@@ -421,7 +422,7 @@ namespace KSPAdvancedFlyByWire
                 string label = "";
                 if (m_CurrentlyEditingDiscreteAction == action)
                 {
-                    label = "Press desired combination";
+                    label = Localizer.Format("#LOC_AFBW_Press_desired_combination");
 
                     if (m_CurrentMask != null && m_ClickSleepTimer == 0.0f)
                     {
@@ -436,7 +437,7 @@ namespace KSPAdvancedFlyByWire
                 {
                     if (bitset == null)
                     {
-                        label = "Click to assign";
+                        label = Localizer.Format("#LOC_AFBW_Click_to_assign");
                     }
                     else
                     {
@@ -512,17 +513,17 @@ namespace KSPAdvancedFlyByWire
                 InputLockManager.RemoveControlLock(inputLockHash);
             }
 
-            windowRect = ClickThruBlocker.GUIWindow(1337 + m_EditorId * 4 + 0, windowRect, DoWindow, "Fly-By-Wire Preset Editor");
+            windowRect = ClickThruBlocker.GUIWindow(1337 + m_EditorId * 4 + 0, windowRect, DoWindow, Localizer.Format("#LOC_AFBW_Fly_By_Wire_Preset_Editor"));
             windowRect = Utility.ClampRect(windowRect, new Rect(0, 0, Screen.width, Screen.height));
 
             if (m_ChooseDiscreteAction)
             {
-                m_ChooseDiscreteActionRect = ClickThruBlocker.GUIWindow(1337 + m_EditorId * 4 + 1, m_ChooseDiscreteActionRect, DoChooseDiscreteActionWindow, "Choose action");
+                m_ChooseDiscreteActionRect = ClickThruBlocker.GUIWindow(1337 + m_EditorId * 4 + 1, m_ChooseDiscreteActionRect, DoChooseDiscreteActionWindow, Localizer.Format("#LOC_AFBW_Choose_action"));
             }
 
             if (m_ChooseContinuousAction)
             {
-                m_ChooseContinuousActionRect = ClickThruBlocker.GUIWindow(1337 + m_EditorId * 4 + 2, m_ChooseContinuousActionRect, DoChooseContinuousActionWindow, "Choose action");
+                m_ChooseContinuousActionRect = ClickThruBlocker.GUIWindow(1337 + m_EditorId * 4 + 2, m_ChooseContinuousActionRect, DoChooseContinuousActionWindow, Localizer.Format("#LOC_AFBW_Choose_action"));
             }
 
             if (m_CurrentlyEditingContinuousAction != ContinuousAction.None || m_CurrentlyEditingDiscreteAction != DiscreteAction.None)

@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
@@ -91,8 +92,12 @@ namespace KSPAdvancedFlyByWire
         //public bool m_MaxMoveSpeedAlways = false;
 
         // Configuration
+
+        #region NO_LOCALIZATION
         private static string ADDON_FOLDER { get { return Path.Combine(Path.Combine(KSPUtil.ApplicationRootPath, "GameData"), "ksp-advanced-flybywire"); } }
         private static string DATAFOLDER { get { return ADDON_FOLDER + "/PluginData"; } }
+        #endregion
+
         private Configuration m_Configuration = null;
 
         private ModSettingsWindow m_ModSettings = null;
@@ -125,7 +130,7 @@ namespace KSPAdvancedFlyByWire
             (
 
                 DATAFOLDER,
-                "advanced_flybywire_config_v" + versionMajor + versionMinor + ".xml"
+                "advanced_flybywire_config_v" + versionMajor + versionMinor + ".xml" // NO_LOCALIZATION
             );
         }
         public string GetAbsoluteSettingsPath()
@@ -134,7 +139,7 @@ namespace KSPAdvancedFlyByWire
             return Path.Combine
             (
                 DATAFOLDER,
-                "settings" + ".xml"
+                "settings" + ".xml" // NO_LOCALIZATION
             );
         }
 
@@ -149,7 +154,7 @@ namespace KSPAdvancedFlyByWire
             m_UIHidden = false;
             m_UIActive = false;
 
-            print("Advanced Fly-By-Wire: Initialized");
+            print("Advanced Fly-By-Wire: Initialized"); // NO_LOCALIZATION
         }
 
         public void OnDestroy()
@@ -165,7 +170,7 @@ namespace KSPAdvancedFlyByWire
             SaveState(null);
             UnregisterCallbacks();
 
-            print("Advanced Fly-By-Wire: Deinitialized");
+            print("Advanced Fly-By-Wire: Deinitialized"); // NO_LOCALIZATION
         }
 
         private void LoadState(ConfigNode configNode)
@@ -343,6 +348,7 @@ namespace KSPAdvancedFlyByWire
         }
 
 
+        #region NO_LOCALIZATION
         //ApplicationLauncherButton ABFWButton = null;
         const string TOOLBAR_BTN_38 = "ksp-advanced-flybywire/Textures/toolbar_btn_38";
         const string TOOLBAR_BTN_24 = "ksp-advanced-flybywire/Textures/toolbar_btn"; 
@@ -368,6 +374,7 @@ namespace KSPAdvancedFlyByWire
             toolbarControl.AddLeftRightClickCallbacks(StockToolbarButtonClick, RightClick);
 
         }
+        #endregion
 
 #if false
         void OnToolbarButtonClick(ClickEvent ev)
@@ -500,7 +507,7 @@ namespace KSPAdvancedFlyByWire
                     m_FlightManager.OnFlyByWire(new FlightCtrlState());
                 }
             }
-            if (Input.GetKey("left shift") && Input.GetKey("l"))
+            if (Input.GetKey("left shift") && Input.GetKey("l")) // NO_LOCALIZATION
             {
                 m_UIActive = true;
             }
@@ -514,13 +521,13 @@ namespace KSPAdvancedFlyByWire
             //  if (GUILayout.Button("X", GUILayout.Height(16)))
             {
                 m_UIActive = false;
-                InputLockManager.RemoveControlLock("AdvancedFlyByWireMainWindow");
+                InputLockManager.RemoveControlLock("AdvancedFlyByWireMainWindow"); // NO_LOCALIZATION
             }
 
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("Mod settings", GUILayout.Width(m_WindowRect.width / 2)))
+            if (GUILayout.Button(Localizer.Format("#LOC_AFBW_Mod_settings"), GUILayout.Width(m_WindowRect.width / 2)))
             {
                 if (m_ModSettings == null)
                 {
@@ -534,7 +541,7 @@ namespace KSPAdvancedFlyByWire
 
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            GUILayout.Label("Controllers");
+            GUILayout.Label(Localizer.Format("#LOC_AFBW_Controllers"));
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
 
@@ -571,7 +578,7 @@ namespace KSPAdvancedFlyByWire
                     GUI.enabled = false;
                 }
 
-                if (GUILayout.Button("Presets", GUILayout.Height(32)))
+                if (GUILayout.Button(Localizer.Format("#LOC_AFBW_Presets"), GUILayout.Height(32)))
                 {
                     if (settings.m_UseOldPresetsWindow)
                     {
@@ -595,7 +602,7 @@ namespace KSPAdvancedFlyByWire
                     GUI.enabled = false;
                 }
 
-                if (GUILayout.Button("Configuration", GUILayout.Height(32)))
+                if (GUILayout.Button(Localizer.Format("#LOC_AFBW_Configuration"), GUILayout.Height(32)))
                 {
                     m_ControllerTests.Add(new ControllerConfigurationWindow(config, m_ControllerTests.Count));
                     config.controllerConfigurationOpen = true;
@@ -615,7 +622,7 @@ namespace KSPAdvancedFlyByWire
                     GUILayout.BeginHorizontal();
                     GUILayout.FlexibleSpace();
 
-                    GUILayout.Label("Preset: " + config.GetCurrentPreset().name);
+                    GUILayout.Label(Localizer.Format("#LOC_AFBW_Preset") + config.GetCurrentPreset().name);
 
                     if (config.currentPreset <= 0)
                     {
@@ -669,14 +676,20 @@ namespace KSPAdvancedFlyByWire
 
             if (Utility.RectContainsMouse(m_WindowRect))
             {
-                InputLockManager.SetControlLock(ControlTypes.All, "AdvancedFlyByWireMainWindow");
+                InputLockManager.SetControlLock(ControlTypes.All, "AdvancedFlyByWireMainWindow"); // NO_LOCALIZATION
             }
             else
             {
-                InputLockManager.RemoveControlLock("AdvancedFlyByWireMainWindow");
+                InputLockManager.RemoveControlLock("AdvancedFlyByWireMainWindow"); // NO_LOCALIZATION
             }
 
-            m_WindowRect = ClickThruBlocker.GUIWindow(0, m_WindowRect, DoMainWindow, "Advanced Fly-By-Wire");
+            if (!AdvancedFlyByWire.Instance.settings.m_UseKSPSkin)
+                m_WindowRect.height = 200;
+            else
+                m_WindowRect.height = 300;
+
+
+            m_WindowRect = ClickThruBlocker.GUIWindow(0, m_WindowRect, DoMainWindow, Localizer.Format("#LOC_AFBW_Advanced_Fly_By_Wire"));
             m_WindowRect = Utility.ClampRect(m_WindowRect, new Rect(0, 0, Screen.width, Screen.height));
 
             for (int i = 0; i < m_PresetEditors.Count; i++)
